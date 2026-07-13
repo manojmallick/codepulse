@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
+  <rect width="800" height="520" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="400" y="30" font-family="system-ui, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#1a1a1a">CodePulse Architecture</text>
+  
+  <!-- User -->
+  <rect x="50" y="80" width="140" height="60" rx="8" fill="#fff" stroke="#6b7280" stroke-width="2"/>
+  <text x="120" y="115" font-family="system-ui, sans-serif" font-size="14" text-anchor="middle" fill="#374151">Slack User</text>
+  
+  <!-- Arrow to Slack -->
+  <line x1="190" y1="110" x2="280" y2="110" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Slack -->
+  <rect x="280" y="80" width="140" height="60" rx="8" fill="#4a154b" stroke="#4a154b" stroke-width="2"/>
+  <text x="350" y="115" font-family="system-ui, sans-serif" font-size="14" text-anchor="middle" fill="#fff" font-weight="bold">Slack</text>
+  
+  <!-- Arrow to CodePulse -->
+  <line x1="420" y1="110" x2="520" y2="110" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- CodePulse App -->
+  <rect x="520" y="70" width="230" height="80" rx="8" fill="#fff" stroke="#2563eb" stroke-width="2"/>
+  <text x="635" y="100" font-family="system-ui, sans-serif" font-size="15" text-anchor="middle" fill="#1a1a1a" font-weight="bold">CodePulse</text>
+  <text x="635" y="125" font-family="system-ui, sans-serif" font-size="12" text-anchor="middle" fill="#4b5563">Bolt.js + MCP Client</text>
+  
+  <!-- Down arrow -->
+  <line x1="635" y1="150" x2="635" y2="200" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- MCP Server -->
+  <rect x="520" y="200" width="230" height="70" rx="8" fill="#fff" stroke="#ea580c" stroke-width="2"/>
+  <text x="635" y="235" font-family="system-ui, sans-serif" font-size="14" text-anchor="middle" fill="#1a1a1a" font-weight="bold">SigMap MCP Server</text>
+  <text x="635" y="255" font-family="system-ui, sans-serif" font-size="12" text-anchor="middle" fill="#4b5563">npx sigmap --mcp</text>
+  
+  <!-- Down arrow -->
+  <line x1="635" y1="270" x2="635" y2="320" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Indexed Repo -->
+  <rect x="520" y="320" width="230" height="70" rx="8" fill="#fff" stroke="#16a34a" stroke-width="2"/>
+  <text x="635" y="355" font-family="system-ui, sans-serif" font-size="14" text-anchor="middle" fill="#1a1a1a" font-weight="bold">Indexed Repository</text>
+  <text x="635" y="375" font-family="system-ui, sans-serif" font-size="12" text-anchor="middle" fill="#4b5563">Your codebase</text>
+  
+  <!-- Optional Slack Search -->
+  <rect x="80" y="200" width="180" height="70" rx="8" fill="#fff" stroke="#7c3aed" stroke-width="2"/>
+  <text x="170" y="235" font-family="system-ui, sans-serif" font-size="14" text-anchor="middle" fill="#1a1a1a" font-weight="bold">RTS API</text>
+  <text x="170" y="255" font-family="system-ui, sans-serif" font-size="12" text-anchor="middle" fill="#4b5563">Workspace Search</text>
+  
+  <!-- Connection from CodePulse to RTS -->
+  <line x1="520" y1="110" x2="260" y2="235" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="5,5"/>
+  
+  <!-- Output back to Slack -->
+  <line x1="520" y1="110" x2="420" y2="110" stroke="#2563eb" stroke-width="2" marker-end="url(#arrowblue)"/>
+  
+  <!-- Legend -->
+  <rect x="50" y="430" width="700" height="70" rx="6" fill="#fff" stroke="#d1d5db" stroke-width="1"/>
+  <text x="70" y="455" font-family="system-ui, sans-serif" font-size="12" fill="#374151"><tspan font-weight="bold">Required technologies:</tspan> Slack AI (response formatting), MCP server integration, Real-Time Search API</text>
+  <text x="70" y="475" font-family="system-ui, sans-serif" font-size="12" fill="#374151">Solid blue line = answer posted back to Slack; dashed line = optional workspace context.</text>
+  <text x="70" y="490" font-family="system-ui, sans-serif" font-size="12" fill="#374151">Run <tspan font-family="monospace">npm run gen:context</tspan> in your target repo before querying.</text>
+  
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#9ca3af"/>
+    </marker>
+    <marker id="arrowblue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2563eb"/>
+    </marker>
+  </defs>
+</svg>

@@ -1,0 +1,23 @@
+{
+  "name": "codepulse",
+  "version": "1.0.0",
+  "description": "Codebase intelligence inside Slack conversations",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "test:mcp": "node scripts/test-mcp.js",
+    "gen:context": "node scripts/gen-context.js",
+    "tools": "node scripts/list-tools.js",
+    "verify": "node scripts/verify.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "@slack/bolt": "^3.22.0",
+    "dotenv": "^16.4.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "license": "MIT"
+}
