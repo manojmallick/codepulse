@@ -69,21 +69,24 @@ async function handleQuestion(question, say, client)  :102-119
 
 **Visual:** Simple architecture slide or diagram.
 
+**Visual:** show `architecture-diagram.png`.
+
 ```
 Slack Message
     |
     v
-CodePulse (Bolt.js app)
+CodePulse (Bolt.js app, Socket Mode)
     |
     +-- MCP --> SigMap (query_context)
-    +-- Search API --> Slack message history
     |
     v
 Grounded answer in thread
 ```
 
 **Voiceover:**
-> CodePulse uses three required Slack technologies: a custom Slack app built with Bolt.js, an MCP server integration through SigMap, and the Real-Time Search API to surface past team discussions about the same component. Slack AI helps summarize long context when needed.
+> CodePulse is a custom Slack app built with Bolt.js, integrating an MCP server — SigMap — through the `query_context` tool. And here is what it deliberately does not do: it never calls a language model. Ranking is deterministic matching over an index, so there is zero inference cost, nothing leaves the machine, and it cannot invent a file path that does not exist.
+
+> **Do not claim Real-Time Search or Slack AI on camera.** `ENABLE_SLACK_SEARCH` is `false` and no LLM is called. The hackathon requirement is Agent Builder **or** MCP **or** RTS — MCP alone satisfies it, and it is the claim you can actually demonstrate.
 
 ---
 
@@ -98,7 +101,7 @@ Grounded answer in thread
 *(Verified: ranks `src/mcpClient.js` at 3.76. Alternative verified queries — "how are responses formatted for slack" → 2.79, "where is handleQuestion defined" → 2.54.)*
 
 **Voiceover:**
-> CodePulse is built on SigMap, which I created. No other submission can combine codebase intelligence, MCP, and Slack search in one workflow. It keeps developers in their conversation and gives them the right answer, grounded in actual code.
+> CodePulse is built on SigMap, an MCP server I published earlier this year — so I control both sides of the protocol boundary. Every answer is grounded by construction: a model can hallucinate a file path, but an index can only return files it actually saw. The citation *is* the answer.
 
 ---
 
@@ -110,7 +113,7 @@ Grounded answer in thread
 CodePulse
 Codebase intelligence inside Slack
 
-MCP integration • Real-Time Search • Slack AI
+MCP integration • Grounded citations • Zero inference cost
 ```
 
 **Voiceover:**
