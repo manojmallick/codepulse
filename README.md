@@ -64,6 +64,55 @@ npm start
 
 The bot connects via Socket Mode and listens for `@CodePulse` mentions and `/ask-codebase` commands.
 
+## Usage
+
+In any channel the bot has been invited to:
+
+- `@CodePulse where is JWT validation handled?`
+- `@CodePulse what does searchSlackHistory do`
+- `/ask-codebase where is auth handled?`
+
+CodePulse sends the question to the SigMap MCP server's `query_context` tool, which ranks the files and signatures in `SIGMAP_PROJECT_ROOT`, and replies with a grounded answer that cites those files and methods. Long answers are truncated to fit Slack's message limit. Mentioning the bot with no question returns a short help message, and saying `hello codepulse` returns an online check.
+
+## How it works
+
+```
+Slack (@CodePulse or /ask-codebase)
+   -> src/index.js        Bolt app, Socket Mode, channel allow-list
+   -> src/mcpClient.js    MCP client (stdio) -> `npx sigmap --mcp` -> query_context
+   <- formatted answer    optionally appended with related past Slack discussions
+```
+
+See [architecture.md](architecture.md) for the full diagram.
+
+## Configuration reference
+
+| Variable | Required | Description |
+|---|---|---|
+| `SLACK_BOT_TOKEN`, `SLACK_SIGNING_SECRET`, `SLACK_APP_TOKEN` | yes | Slack credentials (bot token, signing secret, app-level token for Socket Mode) |
+| `SIGMAP_MCP_COMMAND`, `SIGMAP_MCP_ARGS` | yes | How to launch the SigMap MCP server, default `npx` and `sigmap,--mcp` |
+| `SIGMAP_ASK_TOOL`, `SIGMAP_ASK_ARG` | no | MCP tool name and its argument name, default `query_context` and `query` |
+| `SIGMAP_PROJECT_ROOT` | yes | Absolute path of the repo to answer questions about |
+| `SIGMAP_MOCK` | no | `true` returns simulated answers without running SigMap |
+| `ENABLE_SLACK_SEARCH` | no | `true` appends related past Slack discussions (needs the `search:read` scope) |
+| `ALLOWED_CHANNELS` | no | Comma-separated channel IDs; empty allows all channels |
+
+## Scripts
+
+| Command | What it does |
+|---|---|
+| `npm start` / `npm run dev` | Run the Slack app / run it with auto-restart on change |
+| `npm run gen:context` | Generate SigMap context for `SIGMAP_PROJECT_ROOT` |
+| `npm run verify` | Pre-flight check of config and MCP connection |
+| `npm run tools` | List the tools the SigMap MCP server exposes |
+| `npm run test:mcp -- "<question>"` | Ask one question through the MCP client without Slack |
+
+## Limitations
+
+- It answers about **one repository** (the one in `SIGMAP_PROJECT_ROOT`) and only as fresh as the last context generation; re-run `npm run gen:context` after the code changes.
+- There are no automated tests; use `npm run verify` and `npm run test:mcp`.
+- `package.json` declares MIT; see [LICENSE](LICENSE).
+
 ## Slack App Scopes
 
 Required bot token scopes:
